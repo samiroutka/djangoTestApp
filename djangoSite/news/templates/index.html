@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новости</title>
+  <link rel="stylesheet" href="{% static 'news/static/index.css' %}">
+</head>
+<body>
+{% csrf_token %}
+
+<div class="addNews__wrapper">
+  <button class="addNews">Добавить новость</button>
+  <form class="addNews__form" action="#">
+    <label for="title">Название новости</label>
+    <input type="text" name="title" id="title">
+    <label for="">Описание новости</label>
+    <textarea id="description" name="description" cols="15" rows="5"></textarea>
+    <label for="preview">Превью новости</label>
+    <input type="file" id="preview" name="preview">
+    <button class="addNews__submit">Добавить</button>
+  </form>
+</div>
+
+<div class="allNews__wrapper">
+  <h1 class="allNews__mainTitle">Лента новостей</h1>
+  <div class="allNews">
+    {% for new in news %}
+    <h3 class="allNews__title">{{ new.title }}</h3>
+    <img class="allNews__preview" src="{{ new.preview }}" alt="">
+    <p class="allNews__description">{{ new.description }}</p>
+    <hr>    
+    {% endfor %}
+  </div>
+</div>
+
+<script src="{% static 'news/static/index.js' %}"></script>
+</body>
+</html>
